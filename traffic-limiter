@@ -2,7 +2,7 @@
 show_help() {
     echo "Usage: traffic-limiter INTERFACE RATE"
     echo "  INTERFACE: the netowrk interface to limit"
-    echo "  RATE in bits per second"
+    echo "  RATE: in mbit/s"
 }
 
 for i in "$@"; do
@@ -21,11 +21,10 @@ bucket_size=""
 CONFIG_HZ=$(cat /proc/config.gz | gunzip | grep CONFIG_HZ=)
 HZ="${CONFIG_HZ#*=}"
 
-rate_value="${rate}"
-bucket_size=$(expr ${rate_value} / ${HZ} / 8)
-if [ ${bucket_size} -eq 0 ]; then
-    bucket_size=1
+bucket_size=$(expr ${rate} '*' 1000000 / ${HZ} / 8 )
+if [ ${bucket_size} -lt 5000 ]; then
+    bucket_size=5000
 fi
 
 tc qdisc del dev ${iface} root
-tc qdisc add dev ${iface} root tbf rate ${rate} latency 20ms burst ${bucket_size}
+tc qdisc add dev ${iface} root tbf rate ${rate}mbit latency 100ms burst ${bucket_size}
