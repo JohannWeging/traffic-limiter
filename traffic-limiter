@@ -1,8 +1,8 @@
 #!/bin/sh
 show_help() {
     echo "Usage: traffic-limiter INTERFACE RATE"
-    echo "  INTERFACE: the netowrk interface to limit"
-    echo "  RATE: in mbit/s"
+    echo "  INTERFACE: the network interface to limit"
+    echo "  RATE: rate in mbit/s"
 }
 
 for i in "$@"; do
