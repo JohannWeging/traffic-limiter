@@ -1,0 +1,10 @@
+publish:
+  docker:
+    storage_driver: vfs
+    username: $$DOCKER_USER
+    password: $$DOCKER_PASS
+    email: ""
+    registry: quay.io
+    repo: quay.io/johannweging/traffic-limiter
+    tag: latest
+    insecure: false
