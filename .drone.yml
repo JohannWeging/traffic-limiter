@@ -3,7 +3,7 @@ publish:
     storage_driver: vfs
     username: $$DOCKER_USER
     password: $$DOCKER_PASS
-    email: ""
+    email: " "
     registry: quay.io
     repo: quay.io/johannweging/traffic-limiter
     tag: latest
